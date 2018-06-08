@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Army {
-    private Soldier frontMan;
     private List<Soldier> soldiers = new ArrayList<>();
 
     public Army(Soldier frontMan) {
-        this.frontMan = frontMan;
         soldiers.add(frontMan);
     }
 
     public Soldier getFrontMan() {
-        return frontMan;
+        return soldiers.get(0);
     }
 
     public List<Soldier> getSoldiers() {
@@ -22,5 +20,26 @@ public class Army {
 
     public void add(Soldier soldier) {
         this.soldiers .add(soldier);
+    }
+
+    public Army attack(Army opponent) {
+        Soldier winner = getFrontMan().attack(opponent.getFrontMan());
+        Army loser = soldiers.contains(winner) ? opponent : this;
+        loser.loseFrontMan();
+        if(loser.isDead()){
+            return this;
+        }
+        if(this.isDead()){
+            return opponent;
+        }
+        return attack(opponent);
+    }
+
+    private boolean isDead() {
+        return soldiers.isEmpty();
+    }
+
+    private void loseFrontMan() {
+        soldiers.remove(getFrontMan());
     }
 }

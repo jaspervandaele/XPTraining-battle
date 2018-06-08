@@ -29,9 +29,13 @@ public class Soldier {
     }
 
     public Soldier attack(Soldier oponent) {
-        if(weapon.getDamage() >= oponent.getWeapon().getDamage()){
+        if(winsFrom(oponent)){
             return this;
         }
         return oponent;
+    }
+
+    public boolean winsFrom(Soldier oponent){
+        return  weapon.getDamage() >= oponent.getWeapon().getDamage();
     }
 }
