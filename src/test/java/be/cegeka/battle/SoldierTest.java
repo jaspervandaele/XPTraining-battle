@@ -28,4 +28,36 @@ public class SoldierTest {
         new Soldier("   ");
     }
 
+    @Test
+    public void Soldier_mustHaveBareFist_ByDefault(){
+        Soldier soldier = new Soldier("Jasper");
+        assertThat(soldier.getWeapon()).isEqualTo(Weapon.BARE_FIST);
+    }
+
+    @Test
+    public void attackWithEqualWeaponThenAttackerWins(){
+        Soldier soldierAttacker = new Soldier("Jasper");
+        Soldier soldierGiuseppe = new Soldier("Giuseppe");
+
+        assertThat(soldierAttacker.attack(soldierGiuseppe)).isEqualTo(soldierAttacker);
+    }
+
+    @Test
+    public void attackWithBetterWeaponThenAttackerWins(){
+        Soldier soldierAttacker = new Soldier("Jasper", Weapon.SPEAR);
+        Soldier soldierGiuseppe = new Soldier("Giuseppe");
+
+        assertThat(soldierAttacker.attack(soldierGiuseppe)).isEqualTo(soldierAttacker);
+    }
+
+    @Test
+    public void attackWithWeakerWeaponThenAttackerWins(){
+        Soldier soldierAttacker = new Soldier("Jasper");
+        Soldier soldierGiuseppe = new Soldier("Giuseppe",Weapon.AXE);
+
+        assertThat(soldierAttacker.attack(soldierGiuseppe)).isEqualTo(soldierGiuseppe);
+    }
+
+
+
 }

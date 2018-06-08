@@ -6,15 +6,32 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Soldier {
 
-    private String name;
+    private final String name;
+    private Weapon weapon;
 
     public Soldier(String name) {
-        Validate.isTrue(isNotBlank(name));
+        this(name,Weapon.BARE_FIST);
+    }
 
+    public Soldier(String name, Weapon weapon) {
+        Validate.isTrue(isNotBlank(name));
+        this.weapon = weapon;
         this.name = name;
+
     }
 
     String getName() {
         return this.name;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Soldier attack(Soldier oponent) {
+        if(weapon.getDamage() >= oponent.getWeapon().getDamage()){
+            return this;
+        }
+        return oponent;
     }
 }
