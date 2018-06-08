@@ -20,4 +20,4 @@
 * Click on the tab ```Settings```, ```Collaborators```
 * Search a collaborator and click ```Add collaborator```
 
-y
+z
